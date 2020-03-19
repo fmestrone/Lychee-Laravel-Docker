@@ -32,6 +32,7 @@ services:
     volumes:
       - ./lychee/conf:/conf
       - ./lychee/uploads:/uploads
+      - ./default.conf:/etc/nginx/nginx.conf
     networks:
       - lychee
     environment:
