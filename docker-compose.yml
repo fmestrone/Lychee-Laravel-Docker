@@ -12,14 +12,14 @@ services:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      - MYSQL_ROOT_PASSWORD=<ROOT_PASSWORD>
+      - MYSQL_ROOT_PASSWORD=R00tPassw0rd
       - MYSQL_DATABASE=lychee
       - MYSQL_USER=lychee
-      - MYSQL_PASSWORD=<LYCHEE_PASSWORD>
+      - MYSQL_PASSWORD=Lych33Passw0rd
     expose: 
       - 3306
     volumes:
-      - mysql:/var/lib/mysql
+      - ./lychee/mysql:/var/lib/mysql
     networks:
       - lychee
     restart: unless-stopped
@@ -37,7 +37,7 @@ services:
     environment:
       #- PUID=1000
       #- PGID=1000
-      - PHP_TZ=America/New_York
+      - PHP_TZ=Europe/London
       #- APP_NAME=Laravel
       #- APP_ENV=local
       #- APP_DEBUG=true
@@ -48,7 +48,7 @@ services:
       - DB_PORT=3306
       - DB_DATABASE=lychee
       - DB_USERNAME=lychee
-      - DB_PASSWORD=<LYCHEE_PASSWORD>
+      - DB_PASSWORD=Lych33Passw0rd
       #- DB_DROP_CLEAR_TABLES_ON_ROLLBACK=false
       #- DB_OLD_LYCHEE_PREFIX=''
       #- BROADCAST_DRIVER=log
@@ -73,9 +73,7 @@ services:
     restart: unless-stopped
     depends_on:
       - lychee_db
+    entrypoint: bash -c "sleep 5 && /entrypoint.sh nginx"
 
 networks:
   lychee:
-
-volumes:
-  mysql:
